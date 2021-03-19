@@ -6,7 +6,7 @@ const LogInForm = () => {
     const [isNewUser, setIsNewUser] = useState(false);
 
     const handleFormSubmit = event => {
-
+        console.log('form Submitting');
         event.preventDefault();
     }
 

@@ -12,10 +12,16 @@ import Blog from './components/Blog/Blog';
 import Contact from './components/Contact/Contact';
 import LogIn from './components/LogIn/LogIn';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import { createContext, useState } from 'react';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+
+export const UserContext = createContext();
 
 function App() {
+  const [user, setUser] = useState({});
+  
   return (
-    <div>
+    <UserContext.Provider value={[user, setUser]}>
       <Router>
         <TopNavigationBar />
 
@@ -23,12 +29,12 @@ function App() {
           <Route path="/home">
             <Home />
           </Route>
-          <Route path="/destination">
+          <PrivateRoute path="/destination">
             <Destination />
-          </Route>
-          <Route path="/blog">
+          </PrivateRoute>
+          <PrivateRoute path="/blog">
             <Blog />
-          </Route>
+          </PrivateRoute>
           <Route path="/contact">
             <Contact />
           </Route>
@@ -43,7 +49,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-    </div>
+    </UserContext.Provider>
   );
 }
 
