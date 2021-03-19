@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Col } from 'react-bootstrap';
 import { UserContext } from '../../App';
-import { initializeFirebase } from '../../data/firebaseManager';
+import { createUser, initializeFirebase, signInWithEmailAndPassword } from '../../data/firebaseManager';
 import './LogInForm.css';
 
 const LogInForm = () => {
@@ -19,13 +19,13 @@ const LogInForm = () => {
     }
 
     const isValid = e => {
-        if(e.target.name === 'email'){
+        if (e.target.name === 'email') {
             /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.target.value) ? setIsEmailValid(true) : setIsEmailValid(false);
         }
-        if(e.target.name === 'password'){
+        if (e.target.name === 'password') {
             userData.password.length >= 8 ? setIsPasswordValid(true) : setIsPasswordValid(false);
         }
-        if(e.target.name === 'confirmPassword'){
+        if (e.target.name === 'confirmPassword') {
             userData.password !== userData.confirmPassword ? setIsPasswordMatched(false) : setIsPasswordMatched(true);
         }
     }
@@ -34,12 +34,31 @@ const LogInForm = () => {
         userData[event.target.name] = event.target.value;
         isValid(event);
     }
-    
+
     const handleFormSubmit = event => {
         console.log('form Submitting');
-        if(isEmailValid && isPasswordValid && isPasswordMatched){
-            setUser(userData);
+        if (isNewUser && isEmailValid && isPasswordValid && isPasswordMatched) {
+            createUser(userData.email, userData.password)
+                .then(res => {
+                    res.updateProfile({
+                        displayName: userData.name,
+                    }).then(function () {
+                        setUser(userData);
+                        console.log(res);
+                    }).catch(error => {
+                        alert(error);
+                    });
+                });
         }
+        if (!isNewUser && isEmailValid && isPasswordValid && isPasswordMatched) {
+            signInWithEmailAndPassword(userData.email, userData.password)
+                .then(res => {
+                    console.log(res);
+                    setUser(userData);
+                })
+        }
+
+        event.preventDefault();
     }
 
     return (

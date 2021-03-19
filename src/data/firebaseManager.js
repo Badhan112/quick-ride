@@ -10,7 +10,7 @@ export const initializeFirebase = () => {
     }
 }
 
-export const createUser = (email, password) => {
+export const createUser = async (email, password) => {
 
     return firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
@@ -19,6 +19,18 @@ export const createUser = (email, password) => {
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            
+            alert(`${errorCode} \n ${errorMessage}`);
+        });
+}
+
+export const signInWithEmailAndPassword = (email, password) => {
+    return firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            return userCredential.user;
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(`${errorCode} \n ${errorMessage}`);
         });
 }
