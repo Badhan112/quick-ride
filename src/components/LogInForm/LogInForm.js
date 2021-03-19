@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Col } from 'react-bootstrap';
+import { useHistory, useLocation } from 'react-router';
 import { UserContext } from '../../App';
 import { createUser, initializeFirebase, signInWithEmailAndPassword } from '../../data/firebaseManager';
 import './LogInForm.css';
@@ -17,6 +18,9 @@ const LogInForm = () => {
         password: '',
         confirmPassword: '',
     }
+    let history = useHistory();
+    let location = useLocation();
+    let { from } = location.state || { from: { pathname: "/" } };
 
     const isValid = e => {
         if (e.target.name === 'email') {
@@ -44,6 +48,7 @@ const LogInForm = () => {
                         displayName: userData.name,
                     }).then(function () {
                         setUser(userData);
+                        history.replace(from);
                         console.log(res);
                     }).catch(error => {
                         alert(error);
@@ -54,8 +59,13 @@ const LogInForm = () => {
             signInWithEmailAndPassword(userData.email, userData.password)
                 .then(res => {
                     console.log(res);
+                    userData.name = res.displayName;
                     setUser(userData);
+                    history.replace(from);
                 })
+                .catch(error => {
+                    alert(error);
+                });
         }
 
         event.preventDefault();

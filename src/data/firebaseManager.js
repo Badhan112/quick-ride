@@ -2,6 +2,8 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from "./firebase.config";
 
+
+
 export const initializeFirebase = () => {
     if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
@@ -33,4 +35,12 @@ export const signInWithEmailAndPassword = (email, password) => {
             const errorMessage = error.message;
             alert(`${errorCode} \n ${errorMessage}`);
         });
+}
+
+export const logOut = async () => {
+    return firebase.auth().signOut().then(() => {
+        // Sign-out successful.
+      }).catch((error) => {
+        alert(error);
+      });
 }

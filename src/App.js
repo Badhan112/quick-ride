@@ -14,6 +14,7 @@ import LogIn from './components/LogIn/LogIn';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import { createContext, useState } from 'react';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import User from './components/User/User';
 
 export const UserContext = createContext();
 
@@ -41,6 +42,9 @@ function App() {
           <Route path="/login">
             <LogIn />
           </Route>
+          <PrivateRoute path="/user">
+            <User />
+          </PrivateRoute>
           <Route exact path="/">
             <Home />
           </Route>
