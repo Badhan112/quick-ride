@@ -17,6 +17,7 @@ const LogInForm = () => {
         email: '',
         password: '',
         confirmPassword: '',
+        photo: '',
     }
     let history = useHistory();
     let location = useLocation();
@@ -40,7 +41,6 @@ const LogInForm = () => {
     }
 
     const handleFormSubmit = event => {
-        console.log('form Submitting');
         if (isNewUser && isEmailValid && isPasswordValid && isPasswordMatched) {
             createUser(userData.email, userData.password)
                 .then(res => {
@@ -49,7 +49,6 @@ const LogInForm = () => {
                     }).then(function () {
                         setUser(userData);
                         history.replace(from);
-                        console.log(res);
                     }).catch(error => {
                         alert(error);
                     });
@@ -58,8 +57,9 @@ const LogInForm = () => {
         if (!isNewUser && isEmailValid && isPasswordValid && isPasswordMatched) {
             signInWithEmailAndPassword(userData.email, userData.password)
                 .then(res => {
-                    console.log(res);
-                    userData.name = res.displayName;
+                    const {displayName, photoURL} = res;
+                    userData.name = displayName;
+                    userData.photo = photoURL;
                     setUser(userData);
                     history.replace(from);
                 })
@@ -82,12 +82,14 @@ const LogInForm = () => {
 
                 <input type="email" name="email" onBlur={handleInputField} placeholder="Email" className="input-field" required />
                 {
-                    !isEmailValid && <p className="warning-text">Please Enter Valid Email Address</p>
+                    !isEmailValid
+                    && <p className="warning-text">Please Enter Valid Email Address</p>
                 }
 
                 <input type="password" name="password" onBlur={handleInputField} placeholder="Password" className="input-field" required />
                 {
-                    !isPasswordValid && <p className="warning-text">Password must be Greater then or equal to 8 Charecter</p>
+                    !isPasswordValid
+                    && <p className="warning-text">Password must be Greater then or equal to 8 Charecter</p>
                 }
 
                 {
@@ -95,7 +97,8 @@ const LogInForm = () => {
                     && <input type="password" name="confirmPassword" onBlur={handleInputField} placeholder="Confrim Password" className="input-field" required />
                 }
                 {
-                    !isPasswordMatched && <p className="warning-text">Re-Enter Your Password</p>
+                    !isPasswordMatched
+                    && <p className="warning-text">Re-Enter Your Password</p>
                 }
                 {
                     isNewUser
@@ -103,7 +106,11 @@ const LogInForm = () => {
                         : <input type="submit" value="Login" className="submit-button" />
                 }
             </form>
-            <p style={{ textAlign: 'center' }}>{isNewUser ? 'Already have an account?' : "Don't have an account?"} <span onClick={() => setIsNewUser(!isNewUser)} className="link-text">{isNewUser ? 'Login' : 'Create an Account'}</span> </p>
+            <p style={{ textAlign: 'center' }}>{
+                isNewUser ? 'Already have an account?' : "Don't have an account?"
+            } <span onClick={() => setIsNewUser(!isNewUser)} className="link-text">{
+                isNewUser ? 'Login' : 'Create an Account'
+            }</span> </p>
         </Col>
     );
 };

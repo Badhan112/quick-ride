@@ -25,12 +25,12 @@ export const createUser = async (email, password) => {
         });
 }
 
-export const signInWithEmailAndPassword = (email, password) => {
+export const signInWithEmailAndPassword = async (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
+        .then(userCredential => {
             return userCredential.user;
         })
-        .catch((error) => {
+        .catch(error => {
             const errorCode = error.code;
             const errorMessage = error.message;
             alert(`${errorCode} \n ${errorMessage}`);
@@ -40,7 +40,21 @@ export const signInWithEmailAndPassword = (email, password) => {
 export const logOut = async () => {
     return firebase.auth().signOut().then(() => {
         // Sign-out successful.
-      }).catch((error) => {
+    }).catch(error => {
         alert(error);
-      });
+    });
+}
+
+export const googleSignIn = async () => {
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+    return firebase.auth()
+        .signInWithPopup(googleProvider)
+        .then(result => {
+            return result.user;
+        }).catch(error => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(`${errorCode} \n ${errorMessage}`);
+        });
 }

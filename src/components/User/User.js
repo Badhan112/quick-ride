@@ -1,4 +1,4 @@
-import { Button } from 'react-bootstrap';
+import { Button, Col, Image, Row } from 'react-bootstrap';
 import React, { useContext } from 'react';
 import { UserContext } from '../../App';
 import { logOut } from '../../data/firebaseManager';
@@ -13,7 +13,15 @@ const User = () => {
     }
 
     return (
-        <div style={{textAlign: 'center'}}>
+        <div style={{ textAlign: 'center' }}>
+            {
+                user.photo
+                && <Row className="justify-content-center">
+                        <Col xs={6} md={4}>
+                            <Image src={user.photo} roundedCircle />
+                        </Col>
+                    </Row>
+            }
             <h1>{user.name}</h1>
             <h3>{user.email}</h3>
             <Button variant="danger" className="navBar-link" onClick={handleLogOut}>Log Out</Button>
