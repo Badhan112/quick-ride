@@ -45,16 +45,29 @@ export const logOut = async () => {
     });
 }
 
+const signIn = async (provider) => {
+    return firebase.auth()
+    .signInWithPopup(provider)
+    .then(result => {
+        return result.user;
+    }).catch(error => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(`${errorCode} \n ${errorMessage}`);
+    });
+}
+
+export const facebookSignIn = async () => {
+    const facebookProvider = new firebase.auth.FacebookAuthProvider();
+    return signIn(facebookProvider);
+}
+
 export const googleSignIn = async () => {
     const googleProvider = new firebase.auth.GoogleAuthProvider();
+    return signIn(googleProvider);
+}
 
-    return firebase.auth()
-        .signInWithPopup(googleProvider)
-        .then(result => {
-            return result.user;
-        }).catch(error => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(`${errorCode} \n ${errorMessage}`);
-        });
+export const gitHubSignIn = async () => {
+    const gitHubProvider = new firebase.auth.GithubAuthProvider();
+    return signIn(gitHubProvider);
 }
