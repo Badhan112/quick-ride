@@ -23,3 +23,6 @@
     border-bottom: 1px solid red;
     cursor: pointer;
 }
+.warning-text{
+    color: red;
+}
