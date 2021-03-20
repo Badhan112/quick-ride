@@ -58,7 +58,7 @@ const Place = () => {
                         <Container>
                             <Row>
                                 {
-                                    availableDrivers.map(driver => <AvailableDriver data={driver} />)
+                                    availableDrivers.map(driver => <AvailableDriver data={driver} key={driver.id} />)
                                 }
                             </Row>
                         </Container>
