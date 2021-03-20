@@ -13,10 +13,10 @@ const Home = () => {
         <div className="home">
             <Container>
                 <Row className="vehicle-area">
-                    <Vehicle imgSrc={bike} title="BIKE" />
-                    <Vehicle imgSrc={car} title="CAR" />
-                    <Vehicle imgSrc={bus} title="BUS" />
-                    <Vehicle imgSrc={train} title="TRAIN" />
+                    <Vehicle imgSrc={bike} title="bike" />
+                    <Vehicle imgSrc={car} title="car" />
+                    <Vehicle imgSrc={bus} title="bus" />
+                    <Vehicle imgSrc={train} title="train" />
                 </Row>
             </Container>
         </div>

@@ -17,6 +17,7 @@
     background-color: #FF6E40;
     color: white;
     padding: 10px;
+    border-radius: 5px;
 }
 .link-text{
     color: red;

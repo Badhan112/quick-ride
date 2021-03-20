@@ -1,10 +1,16 @@
 import React from 'react';
+import { Container, Row } from 'react-bootstrap';
+import Map from '../Map/Map';
+import Place from '../Place/Place';
 
 const Destination = () => {
     return (
-        <div>
-            <h1>Destination</h1>
-        </div>
+        <Container style={{marginTop: '40px'}}>
+            <Row>
+                <Place />
+                <Map />
+            </Row>
+        </Container>
     );
 };
 

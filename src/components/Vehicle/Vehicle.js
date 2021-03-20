@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card, Col } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
+import { VehicleContext } from '../../App';
 
 const Vehicle = ({imgSrc, title}) => {
+    const [selectedVehicle, setSelectedVehicle] = useContext(VehicleContext);
     const history = useHistory();
     const handleVehicleSelection = () => {
+        setSelectedVehicle(title);
         history.push("/destination");
     }
     return (
@@ -12,7 +15,7 @@ const Vehicle = ({imgSrc, title}) => {
             <Card style={{padding: '20px', boxShadow: '5px 5px 10px grey', cursor: 'pointer', backgroundColor: 'rgba(255, 255, 255, 0.7)'}} onClick={handleVehicleSelection}>
                 <Card.Img variant="top" src={imgSrc} style={{padding: '20px'}}/>
                 <Card.Body style={{textAlign: 'center'}}>
-                    <Card.Title>{title}</Card.Title>
+                    <Card.Title>{title.toUpperCase()}</Card.Title>
                 </Card.Body>
             </Card>
         </Col>

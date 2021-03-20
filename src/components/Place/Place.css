@@ -1,0 +1,23 @@
+.place-area{
+    background-color: rgb(238, 238, 238);
+    padding: 20px;
+    border-radius: 7px;
+    font-size: 20px;
+}
+.place-input-field{
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 10px 10px;
+    width: 100%;
+}
+.selected-place-area{
+    background-color: #FF6E40;
+    padding: 20px;
+    color: white;
+    border-radius: 7px;
+}
+.place-icon{
+    color: rgb(226, 228, 228);
+    margin-right: 20px;
+}
