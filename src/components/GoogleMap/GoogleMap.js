@@ -9,12 +9,11 @@ class SimpleMap extends Component {
       lat: 26.032101,
       lng: 88.460716
     },
-    zoom: 30
+    zoom: 13
   };
  
   render() {
     return (
-      // Important! Always set the container height explicitly
       <div style={{ height: '70vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: '' }}
@@ -24,7 +23,7 @@ class SimpleMap extends Component {
           <AnyReactComponent
             lat={26.032101}
             lng={88.460716}
-            text="My Marker"
+            text="PickUp Location"
           />
         </GoogleMapReact>
       </div>
