@@ -8,7 +8,7 @@ import bus from '../../images/Frame-1.png';
 import train from '../../images/Group.png';
 
 const Home = () => {
-    
+    document.title = 'Quick Ride - Home';
     return (
         <div className="home">
             <Container>

@@ -5,7 +5,7 @@ import LogInWithSocalMedia from '../LogInWithSocalMedia/LogInWithSocalMedia';
 import './LogIn.css';
 
 const LogIn = () => {
-    
+    document.title = 'Quick Ride - Log In';
     return (
         <div className="login-area">
             <Container>

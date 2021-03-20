@@ -5,7 +5,7 @@ import { logOut } from '../../data/firebaseManager';
 
 const User = () => {
     const [user, setUser] = useContext(UserContext);
-
+    document.title = `Quick Ride - ${user.name}`;
     const handleLogOut = () => {
         logOut().then(() => {
             setUser({});

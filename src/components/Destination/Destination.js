@@ -4,6 +4,7 @@ import Map from '../Map/Map';
 import Place from '../Place/Place';
 
 const Destination = () => {
+    document.title = 'Quick Ride - Destination';
     return (
         <Container style={{marginTop: '40px'}}>
             <Row>
